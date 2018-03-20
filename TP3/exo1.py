@@ -1,6 +1,6 @@
 import sys
-s1 = "AGATAGA"
-s2 = "AGTTG"
+s1 = "AGT"
+s2 = "GTA"
 a = []
 #init
 for i in range(len(s2) + 1):
@@ -23,15 +23,15 @@ while x>=0 and y>=0:
 	if y>0:
 		r = a[y-1][x]-1
 	else:
-		r = -100
+		r = -1000000000
 	if x>0 and y>0:
 		m = a[y-1][x-1]+(-1 if s1[x-1]!=s2[y-1] else 1)
 	else:
-		m = -1111
+		m = -1000000000
 	if x>0:
 		b = a[y][x-1]-1
 	else:
-		b=-100
+		b=-1000000000
 	if a[y][x] == r:
 		s1a = "-" + s2a	
 		s2a = s2[y-1] + s2a
@@ -47,9 +47,16 @@ while x>=0 and y>=0:
 		x-=1
 
 #affichage
+sys.stdout.write("      "+"  ".join([s1[i] for i in range(len(s1))]))
+print
 for i in range(len(s2)+1):
+	if i-1>=0:
+		sys.stdout.write(s2[i-1])
+	else:
+		sys.stdout.write(" ")
 	for j in range(len(s1) + 1):
 		sys.stdout.write("%3d"%a[i][j])
 	print
 print s1a[1:]
 print s2a[1:]
+print "Le cout est: %d"%a[len(s2)][len(s1)]
